@@ -1,4 +1,4 @@
-///<reference types = "cypress"/>
+///<reference types="cypress"/>
 
 describe('Seletores avançados com cypress', () => {
 
@@ -7,51 +7,53 @@ describe('Seletores avançados com cypress', () => {
   });
 
   it('Seleciona elementos que contêm um Texto específico', () => {
-    //TODO: 
+    cy.contains('Item 3').should('have.attr', 'class', 'filho-3')
   });
-    
+
   it('Seleciona o elemento com a classe pai', () => {
-    //TODO: 
-  })
+    cy.get('.pai').should('exist')
+  });
 
   it('Seleciona o elemento com o id Filho', () => {
-    //TODO: 
-   })
+    cy.get('#id-filho').should('exist')
+  });
 
   it('Seleciona um elemento filho dentro do elemento com a classe pai', () => {
-    //TODO: 
+    cy.get('.pai .filho-3').should('exist')
   });
 
   it('Seleciona o segundo elemento <span> com a classe irmao', () => {
-    //TODO: 
+    cy.get('.irmao').eq(1).should('have.id', 'irmao-2')
   });
 
   it('Seleciona o próximo elemento irmão', () => {
-    //TODO: 
+    cy.get('#irmao-1').next().should('have.id', 'irmao-2')
   });
 
   it('Seleciona o elemento irmão anterior', () => {
-    //TODO: 
+    cy.get('#irmao-2').prev().should('have.id', 'irmao-1')
   });
 
   it('Seleciona o irmão da div anterior', () => {
-    //TODO: 
+    cy.get('.pai-tio-2').prev().should('have.class', 'pai-tio-1')
   });
 
   it('Seleciona o terceiro elemento <li> encontrado', () => {
-    //TODO: 
+    cy.get('.pai li').eq(2).should('have.class', 'filho-3')
   });
 
   it('Seleciona o elemento com o atributo data-test', () => {
-    //TODO: 
+    cy.get('[data-test="div-pai"]').should('exist')
   });
 
   it('Seleciona o elemento com a classe pai do elemento com a classe filho', () => {
-    //TODO: 
+    cy.get('.filho-3').parents('.pai').should('exist')
   });
 
   it('Seleciona o elemento com um valor em um select', () => {
-    //TODO: 
+    cy.get('select[name="opcao"]').select('muito')
+    cy.get('#id-enviar').click()
+    cy.get('#mensagemFeedback').should('have.text', 'Obrigado por compartilhar conosco!')
   });
 
-})
+});
